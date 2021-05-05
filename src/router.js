@@ -1,45 +1,37 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Inicio from './components/Inicio'
-import SobreMi from './components/SobreMi'
-import Contacto from './components/Contacto'
-import Post from './components/Post'
-import Articulo from './components/Articulo'
-import NotFound from './components/NotFound'
+
 Vue.use(Router)
 
 export default new Router({
-    mode: 'history', 
-    routes: [
-        {
+    mode: 'history',
+    routes: [{
             path: '/',
             name: 'inicio',
-            component: Inicio
+            component: () => import('./views/Inicio')
         },
         {
             path: '/sobremi',
             name: 'sobremi',
-            component: SobreMi
+            component: () => import('./views/SobreMi')
         },
         {
             path: '/contacto',
             name: 'contacto',
-            component: Contacto
+            component: () => import('./views/Contacto')
         },
         {
             path: '/post',
             name: 'post',
-            component: Post,
-            children: [
-                {
-                    path: ':articulo',
-                    component: Articulo,
-                }
-            ]
+            component: () => import('./views/Post'),
+            children: [{
+                path: ':articulo',
+                component: () => import('./views/Articulo')
+            }]
         },
         {
             path: '*',
-            component: NotFound
+            component: () => import('./views/NotFound')
         }
     ]
 })
