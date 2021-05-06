@@ -8,30 +8,53 @@ export default new Router({
     routes: [{
             path: '/',
             name: 'inicio',
-            component: () => import('./views/Inicio')
+            component: () => import( /* webpackChunkName: "inicio" */ './views/Inicio')
+        },
+        {
+            path: '/home',
+            name: 'home',
+            redirect: '/'
+        },
+        {
+            path: '/portada',
+            name: 'portada',
+            redirect: '/'
+        },
+        {
+            path: '/inicio',
+            name: 'inicio',
+            redirect: '/'
+        },
+        {
+            path: '/administrador/:type',
+            name: 'administrador',
+            component: () => import( /* webpackChunkName: "administrador" */ './views/Administrador'),
+            props: true
         },
         {
             path: '/sobremi',
             name: 'sobremi',
-            component: () => import('./views/SobreMi')
+            alias: '/acerca',
+            component: () => import( /* webpackChunkName: "sobremi" */ './views/SobreMi')
         },
         {
             path: '/contacto',
             name: 'contacto',
-            component: () => import('./views/Contacto')
+            alias: '/contactame',
+            component: () => import( /* webpackChunkName: "contacto" */ './views/Contacto')
         },
         {
             path: '/post',
             name: 'post',
-            component: () => import('./views/Post'),
+            component: () => import( /* webpackChunkName: "post" */ './views/Post'),
             children: [{
                 path: ':articulo',
-                component: () => import('./views/Articulo')
+                component: () => import( /* webpackChunkName: "articulo" */ './views/Articulo')
             }]
         },
         {
             path: '*',
-            component: () => import('./views/NotFound')
+            component: () => import( /* webpackChunkName: "notfound" */ './views/NotFound')
         }
     ]
 })
